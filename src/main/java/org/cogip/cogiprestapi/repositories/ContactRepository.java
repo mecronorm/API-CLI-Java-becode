@@ -97,7 +97,7 @@ public class ContactRepository {
             contact.getCompanyId());
   }
   
-  public Contact updateContact(Contact contact){
+  public Contact updateContact(int id, Contact contact){
     StringBuilder sqlBuilder = new StringBuilder();
     sqlBuilder.append("UPDATE contact");
     sqlBuilder.append(" SET firstname = ?, lastname = ?, phone = ?, email = ?, contact_company_id = ?");
@@ -109,7 +109,7 @@ public class ContactRepository {
             contact.getPhone(),
             contact.getEmail(),
             contact.getCompanyId(),
-            contact.getId());
+            id);
     
     return this.jdbc.queryForObject("SELECT * FROM contact WHERE id=?", getContactRowMapper(), contact.getId());
   }

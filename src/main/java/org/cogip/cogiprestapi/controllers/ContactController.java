@@ -9,7 +9,7 @@ import org.cogip.cogiprestapi.services.ContactService;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping ("/contacts")
 public class ContactController {
   
   private final ContactService contactService;
@@ -18,12 +18,12 @@ public class ContactController {
     this.contactService = contactService;
   }
   
-  @GetMapping ("/contacts")
+  @GetMapping
   public List<Contact> getAllContact() {
     return this.contactService.getAllContacts();
   }
   
-  @GetMapping ("/contacts/search")
+  @GetMapping ("/search")
   public List<Contact> getContactsByFilters(
           @RequestParam (required = false) Integer id,
           @RequestParam (required = false) String firstname,
@@ -34,7 +34,7 @@ public class ContactController {
     return this.contactService.getContactsByFilters(id, firstname, lastname, phone, companyId);
   }
   
-  @PostMapping ("/contacts/add")
+  @PostMapping ("/add")
   public ResponseEntity<String> addContact(@RequestBody Contact contact){
     this.contactService.addContact(contact);
     
@@ -43,17 +43,17 @@ public class ContactController {
             .body("Contact " + contact.getFirstname() + " " + contact.getLastname() + " was successfully added.");
   }
   
-  @PutMapping ("/contacts/update")
-  public ResponseEntity<Contact> updateContact(@RequestBody Contact contact){
-    Contact updatedContact = this.contactService.updateContact(contact);
+  @PutMapping ("/update/{id}")
+  public ResponseEntity<Contact> updateContact(@PathVariable("id") int id, @RequestBody Contact contact){
+    Contact updatedContact = this.contactService.updateContact(id, contact);
     
     return ResponseEntity
             .status(HttpStatus.OK)
             .body(updatedContact);
   }
   
-  @DeleteMapping("/contacts/delete/{id}")
-  public ResponseEntity<String> deleteContact(@PathVariable int id){
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<String> deleteContact(@PathVariable("id") int id){
     this.contactService.deleteContact(id);
     
     return ResponseEntity

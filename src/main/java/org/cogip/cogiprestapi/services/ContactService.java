@@ -27,8 +27,8 @@ public class ContactService {
     this.contactRepository.addContact(contact);
   }
   
-  public Contact updateContact(Contact contact){
-    return this.contactRepository.updateContact(contact);
+  public Contact updateContact(int id, Contact contact){
+    return this.contactRepository.updateContact(id, contact);
   }
   
   public void deleteContact(int id){
