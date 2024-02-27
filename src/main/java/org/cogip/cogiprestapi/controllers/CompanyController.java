@@ -30,4 +30,14 @@ public class CompanyController {
         return companyRepository.findCompanyById(Integer.valueOf(id));
     }
 
+    @PutMapping("/{id}")
+    public String updateCompany(@PathVariable("id") String id,@RequestBody Company company){
+        return companyRepository.updateCompany(Integer.valueOf(id), company);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteCompany(@PathVariable("id") String id){
+        return companyRepository.deleteCompany(Integer.valueOf(id));
+    }
+
 }

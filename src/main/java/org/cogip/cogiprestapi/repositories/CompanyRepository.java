@@ -21,9 +21,20 @@ public class CompanyRepository{
         jbcd.update(sql, company.getName(), company.getCountry(), company.getVat(), company.getType().name());
     }
 
+    public String updateCompany(Integer id, Company company){
+        String sql = "UPDATE company SET name = ?, country = ?, vat = ?, type = ? WHERE id = ?";
+        jbcd.update(sql,company.getName(),company.getCountry(),company.getVat(),company.getType().name(),id);
+        return "Successfully updated company with id "+id;
+    }
+
+    public String deleteCompany(Integer id){
+        String sql = "DELETE FROM company WHERE id = ?";
+        jbcd.update(sql, id);
+        return "Company with id "+id+" has been deleted";
+    }
+
     public List<Company> findAllCompanies(){
         String sql = "SELECT * FROM company";
-
         return jbcd.query(sql, companyRowMapper());
     }
 
