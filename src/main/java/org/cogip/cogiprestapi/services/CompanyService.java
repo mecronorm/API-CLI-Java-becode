@@ -1,5 +1,6 @@
 package org.cogip.cogiprestapi.services;
 
+import org.cogip.cogiprestapi.enums.CompanyType;
 import org.cogip.cogiprestapi.model.Company;
 import org.cogip.cogiprestapi.repositories.CompanyRepository;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,10 @@ public class CompanyService {
 
     public String deleteCompany(Integer id){
         return companyRepository.deleteCompany(id);
+    }
+
+    public List<Company> findCompanyByType(CompanyType type){
+        return companyRepository.findCompanyWhithStatus(type);
     }
 
     public List<Company> findAllCompanies(){
