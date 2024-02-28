@@ -14,8 +14,8 @@ public class CompanyController {
     private CompanyService companyService;
 
     @PostMapping
-    public void storeCompany(@RequestBody Company company){
-        companyService.storeCompany(company);
+    public String storeCompany(@RequestBody Company company){
+        return companyService.storeCompany(company);
     }
 
     @GetMapping

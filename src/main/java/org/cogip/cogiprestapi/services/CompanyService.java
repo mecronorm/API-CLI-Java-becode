@@ -15,8 +15,8 @@ public class CompanyService {
         this.companyRepository = companyRepository;
     }
 
-    public void storeCompany(Company company){
-        companyRepository.storeCompany(company);
+    public String storeCompany(Company company){
+        return companyRepository.storeCompany(company);
     }
 
     public String updateCompany(Integer id, Company company){

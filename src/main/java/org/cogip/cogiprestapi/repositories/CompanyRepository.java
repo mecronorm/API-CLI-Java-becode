@@ -15,10 +15,11 @@ public class CompanyRepository{
         this.jbcd = jdbc;
     }
 
-    public void storeCompany(Company company){
+    public String storeCompany(Company company){
         String sql = "INSERT INTO company (name, country, vat, type) VALUES (?, ?, ?, ?)";
 
         jbcd.update(sql, company.getName(), company.getCountry(), company.getVat(), company.getType().name());
+        return "Successfully added new company";
     }
 
     public String updateCompany(Integer id, Company company){
