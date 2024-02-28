@@ -1,5 +1,8 @@
 package org.cogip.cogiprestapi.controllers;
 
+import org.apache.coyote.BadRequestException;
+import org.cogip.cogiprestapi.exceptions.IdDoesNotExistException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +27,14 @@ public class UserController {
   }
   
   @GetMapping ("/{id}")
-  public User getUserById(@PathVariable String id){
-    return this.userService.getUserById(id);
+  public User getUserById(@PathVariable String id) throws EmptyResultDataAccessException {
+    try{
+      return this.userService.getUserById(id);
+    }
+    catch (EmptyResultDataAccessException e){
+      System.out.println(e.getMessage());
+      throw new IdDoesNotExistException();
+    }
   }
   
   @PostMapping

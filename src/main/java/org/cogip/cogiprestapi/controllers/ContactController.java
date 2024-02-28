@@ -19,7 +19,6 @@ public class ContactController {
   }
   
   @GetMapping
-  
   public List<Contact> getAllContact() {
     return this.contactService.getAllContacts();
   }
