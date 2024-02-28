@@ -29,7 +29,7 @@ public class CompanyService {
     }
 
     public List<Company> findCompanyByType(CompanyType type){
-        return companyRepository.findCompanyWhithStatus(type);
+        return companyRepository.findCompanyByType(type);
     }
 
     public List<Company> findAllCompanies(){
