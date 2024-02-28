@@ -9,7 +9,7 @@ import org.cogip.cogiprestapi.model.User;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping ("/users")
 public class UserController {
   
   private final UserService userService;
@@ -18,17 +18,17 @@ public class UserController {
     this.userService = userService;
   }
   
-  @GetMapping ("/users")
+  @GetMapping
   public List<User> getAllUsers(){
     return this.userService.getAllUsers();
   }
   
-  @GetMapping ("/users/{id}")
+  @GetMapping ("/{id}")
   public User getUserById(@PathVariable String id){
     return this.userService.getUserById(id);
   }
   
-  @PostMapping ("/users")
+  @PostMapping
   public ResponseEntity<String> addUser(@RequestBody User user){
     this.userService.addUser(user);
     
@@ -37,7 +37,7 @@ public class UserController {
             .body("User " + user.getUsername() + " added successfully.");
   }
   
-  @PutMapping("/users/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<User> updateUser(@PathVariable int id,
                                          @RequestBody User user){
     User updatedUser = this.userService.updateUser(id, user);
