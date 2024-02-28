@@ -1,6 +1,6 @@
 package org.cogip.cogiprestapi.enums;
 
-public enum Type {
+public enum CompanyType {
     provider,
     client
 }

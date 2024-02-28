@@ -1,7 +1,7 @@
 package org.cogip.cogiprestapi.model;
 
 import jakarta.persistence.*;
-import org.cogip.cogiprestapi.enums.Type;
+import org.cogip.cogiprestapi.enums.CompanyType;
 
 import java.sql.Timestamp;
 
@@ -22,7 +22,7 @@ public class Company {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private Type type;
+    private CompanyType companyType;
 
     @Column(name = "timestamp", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp timestamp;
@@ -35,12 +35,12 @@ public class Company {
         this.name = name;
     }
 
-    public Type getType() {
-        return type;
+    public CompanyType getType() {
+        return companyType;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setType(CompanyType companyType) {
+        this.companyType = companyType;
     }
 
     public int getId() {

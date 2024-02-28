@@ -1,6 +1,6 @@
 package org.cogip.cogiprestapi.repositories;
 
-import org.cogip.cogiprestapi.enums.Type;
+import org.cogip.cogiprestapi.enums.CompanyType;
 import org.cogip.cogiprestapi.model.Company;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -50,7 +50,7 @@ public class CompanyRepository{
             rowObject.setName(r.getString("name"));
             rowObject.setCountry(r.getString("country"));
             rowObject.setVat(r.getString("vat"));
-            rowObject.setType(Type.valueOf(r.getString("type")));
+            rowObject.setType(CompanyType.valueOf(r.getString("type")));
             rowObject.setTimestamp(r.getTimestamp("timestamp"));
 
             return rowObject;
