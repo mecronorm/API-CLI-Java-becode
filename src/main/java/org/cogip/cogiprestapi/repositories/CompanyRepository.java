@@ -39,7 +39,7 @@ public class CompanyRepository{
         return jbcd.query(sql, companyRowMapper());
     }
 
-    public List<Company> findCompanyWhithStatus(CompanyType type){
+    public List<Company> findCompanyByType(CompanyType type){
         String sql = "SELECT * FROM company WHERE type = ?";
         return jbcd.query(sql, new Object[]{type.name()}, companyRowMapper());
     }
