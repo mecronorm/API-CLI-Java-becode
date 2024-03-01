@@ -14,32 +14,32 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @PostMapping
+    @PostMapping("/add")
     public String storeCompany(@RequestBody Company company){
         return companyService.storeCompany(company);
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public List<Company> findCompanies(){
         return companyService.findAllCompanies();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public Company findCompanyById(@PathVariable("id") String id){
         return companyService.findCompanyById(Integer.valueOf(id));
     }
 
-    @GetMapping("/type/{type}")
+    @GetMapping("/get/type/{type}")
     public List<Company> getCompanyByType(@PathVariable("type")CompanyType type){
         return companyService.findCompanyByType(type);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public String updateCompany(@PathVariable("id") String id,@RequestBody Company company){
         return companyService.updateCompany(Integer.valueOf(id), company);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteCompany(@PathVariable("id") String id){
         return companyService.deleteCompany(Integer.valueOf(id));
     }

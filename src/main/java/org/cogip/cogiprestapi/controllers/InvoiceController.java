@@ -13,7 +13,7 @@ public class InvoiceController {
   @Autowired
   private InvoiceService invoiceService;
   
-  @PostMapping ("/add")
+  @PostMapping("/add")
   public String createInvoice(@RequestBody Invoice invoice){
     return invoiceService.createInvoice(invoice);
   }
@@ -28,12 +28,12 @@ public class InvoiceController {
     return invoiceService.deleteInvoice(Integer.valueOf(id));
   }
   
-  @GetMapping("/{id}")
+  @GetMapping("/get/{id}")
   public Invoice getInvoiceById(@PathVariable("id") String id){
     return invoiceService.getInvoiceById(Integer.valueOf(id));
   }
   
-  @GetMapping
+  @GetMapping("/get")
   public List<Invoice> getAllInvoice(){
     return invoiceService.getAllInvoice();
   }
