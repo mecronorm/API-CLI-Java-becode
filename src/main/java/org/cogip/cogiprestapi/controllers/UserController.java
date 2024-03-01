@@ -37,7 +37,7 @@ public class UserController {
     }
   }
   
-  @PostMapping
+  @PostMapping ("/add")
   public ResponseEntity<String> addUser(@RequestBody User user){
     this.userService.addUser(user);
     
@@ -46,7 +46,7 @@ public class UserController {
             .body("User " + user.getUsername() + " added successfully.");
   }
   
-  @PutMapping("/{id}")
+  @PutMapping("/edit/{id}")
   public ResponseEntity<User> updateUser(@PathVariable int id,
                                          @RequestBody User user){
     User updatedUser = this.userService.updateUser(id, user);
