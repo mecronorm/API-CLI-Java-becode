@@ -2,13 +2,13 @@ package org.cogip.cogiprestapi.Exeptions;
 
 import org.springframework.http.HttpStatus;
 
-public class CompanyException {
+public class APIException {
     private final String message;
     private final Throwable throwable;
     private final HttpStatus status;
 
 
-    public CompanyException(String message, Throwable throwable, HttpStatus status) {
+    public APIException(String message, Throwable throwable, HttpStatus status) {
         this.message = message;
         this.throwable = throwable;
         this.status = status;

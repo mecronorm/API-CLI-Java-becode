@@ -10,8 +10,8 @@ public class APIExceptionHandler {
 
     @ExceptionHandler(value = {IdNotFoundException.class})
     public ResponseEntity<Object> handelIdNotFoundException(IdNotFoundException idNotFoundException){
-        CompanyException companyException = new CompanyException(idNotFoundException.getMessage(),idNotFoundException.getCause(), HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(companyException, HttpStatus.NOT_FOUND);
+        APIException APIException = new APIException(idNotFoundException.getMessage(),idNotFoundException.getCause(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(APIException, HttpStatus.NOT_FOUND);
     }
 
 }
