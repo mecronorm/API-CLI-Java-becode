@@ -1,8 +1,10 @@
 package org.cogip.cogiprestapi.services;
 
+import org.cogip.cogiprestapi.Exeptions.IdNotFoundException;
 import org.cogip.cogiprestapi.enums.CompanyType;
 import org.cogip.cogiprestapi.model.Company;
 import org.cogip.cogiprestapi.repositories.CompanyRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,9 +38,11 @@ public class CompanyService {
         return companyRepository.findAllCompanies();
     }
 
-    public Company findCompanyById(Integer id){
-        return companyRepository.findCompanyById(id);
+    public Company findCompanyById(Integer id) {
+        try {
+            return companyRepository.findCompanyById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new IdNotFoundException("Id number "+id+" not found");
+        }
     }
-
-
 }
