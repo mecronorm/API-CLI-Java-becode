@@ -4,8 +4,10 @@ import org.cogip.cogiprestapi.Exeptions.*;
 import org.cogip.cogiprestapi.enums.CompanyType;
 import org.cogip.cogiprestapi.model.Company;
 import org.cogip.cogiprestapi.repositories.CompanyRepository;
+import org.springframework.boot.json.JsonParseException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -30,6 +32,8 @@ public class CompanyService {
             throw new MissingParametersException(error);
         }catch (DataIntegrityViolationException e){
             throw new DuplicateValueException(company.getVat()+" is a duplicate, only give in an original vat number");
+        }catch (IllegalArgumentException e){
+            throw new InvalidInputException("Input for type is not "+ Arrays.toString(CompanyType.values()));
         }
     }
 
@@ -41,6 +45,8 @@ public class CompanyService {
             throw new MissingParametersException(companyNullError(company));
         }catch (DataIntegrityViolationException e){
             throw new DuplicateValueException(company.getVat()+" is a duplicate, only give in an original vat number");
+        }catch (JsonParseException e){
+            throw new InvalidInputException("Input for type is not "+ Arrays.toString(CompanyType.values()));
         }
     }
 

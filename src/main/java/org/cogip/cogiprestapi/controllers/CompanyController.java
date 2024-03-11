@@ -1,9 +1,12 @@
 package org.cogip.cogiprestapi.controllers;
 
+import org.cogip.cogiprestapi.Exeptions.InvalidInputException;
 import org.cogip.cogiprestapi.enums.CompanyType;
 import org.cogip.cogiprestapi.model.Company;
 import org.cogip.cogiprestapi.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.JsonParseException;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +19,11 @@ public class CompanyController {
 
     @PostMapping
     public String storeCompany(@RequestBody Company company){
-        return companyService.storeCompany(company);
+        try {
+            return companyService.storeCompany(company);
+        }catch (HttpMessageNotReadableException e){
+            throw new InvalidInputException("Enum input is wrong");
+        }
     }
 
     @GetMapping
