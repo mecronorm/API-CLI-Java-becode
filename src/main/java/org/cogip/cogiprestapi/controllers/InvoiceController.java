@@ -20,17 +20,17 @@ public class InvoiceController {
   
   @PutMapping("/{id}")
   public String updateInvoice(@PathVariable("id") String id, @RequestBody Invoice invoice){
-    return invoiceService.updateInvoice(Integer.valueOf(id), invoice);
+    return invoiceService.updateInvoice(id, invoice);
   }
   
   @DeleteMapping("/{id}")
   public String deleteInvoice(@PathVariable("id") String id){
-    return invoiceService.deleteInvoice(Integer.valueOf(id));
+    return invoiceService.deleteInvoice(id);
   }
   
   @GetMapping("/{id}")
   public Invoice getInvoiceById(@PathVariable("id") String id){
-    return invoiceService.getInvoiceById(Integer.valueOf(id));
+    return invoiceService.getInvoiceById(id);
   }
   
   @GetMapping
