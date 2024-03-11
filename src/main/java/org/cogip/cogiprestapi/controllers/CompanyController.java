@@ -26,22 +26,22 @@ public class CompanyController {
 
     @GetMapping("/{id}")
     public Company findCompanyById(@PathVariable("id") String id){
-        return companyService.findCompanyById(Integer.valueOf(id));
+        return companyService.findCompanyById(id);
     }
 
     @GetMapping("/type/{type}")
-    public List<Company> getCompanyByType(@PathVariable("type")CompanyType type){
+    public List<Company> getCompanyByType(@PathVariable("type")String type){
         return companyService.findCompanyByType(type);
     }
 
     @PutMapping("/{id}")
     public String updateCompany(@PathVariable("id") String id,@RequestBody Company company){
-        return companyService.updateCompany(Integer.valueOf(id), company);
+        return companyService.updateCompany(id, company);
     }
 
     @DeleteMapping("/{id}")
     public String deleteCompany(@PathVariable("id") String id){
-        return companyService.deleteCompany(Integer.valueOf(id));
+        return companyService.deleteCompany(id);
     }
 
 }
