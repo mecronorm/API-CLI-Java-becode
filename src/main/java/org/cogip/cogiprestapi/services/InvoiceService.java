@@ -1,11 +1,9 @@
 package org.cogip.cogiprestapi.services;
 
-import org.cogip.cogiprestapi.Exeptions.IdNotFoundException;
-import org.cogip.cogiprestapi.Exeptions.InvalidInputException;
-import org.cogip.cogiprestapi.Exeptions.MissingParametersException;
-import org.cogip.cogiprestapi.Exeptions.ResultSetEmptyException;
+import org.cogip.cogiprestapi.Exeptions.*;
 import org.cogip.cogiprestapi.model.Invoice;
 import org.cogip.cogiprestapi.repositories.InvoiceRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +22,8 @@ public class InvoiceService {
             return invoiceRepository.createInvoice(invoice);
         }catch (NullPointerException e){
             throw new MissingParametersException(invoiceNullError(invoice,newInvoiceNullError(invoice)));
+        }catch (DataIntegrityViolationException e){
+            throw new DuplicateValueException(invoice.getInvoice_number()+" is a duplicate, only give in an original vat number");
         }
     }
 
@@ -33,6 +33,8 @@ public class InvoiceService {
         }catch (NullPointerException e){
             String error = "|No input: ";
             throw new MissingParametersException(invoiceNullError(invoice,error));
+        }catch (DataIntegrityViolationException e){
+            throw new DuplicateValueException(invoice.getInvoice_number()+" is a duplicate, only give in an original vat number");
         }
     }
 
