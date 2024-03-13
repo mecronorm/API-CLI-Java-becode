@@ -23,7 +23,18 @@ public class InvoiceService {
         }catch (NullPointerException e){
             throw new MissingParametersException(invoiceNullError(invoice,newInvoiceNullError(invoice)));
         }catch (DataIntegrityViolationException e){
-            throw new DuplicateValueException(invoice.getInvoice_number()+" is a duplicate, only give in an original vat number");
+            if (e.getMessage().contains("foreign key constraint")){
+                if (e.getMostSpecificCause().getMessage().contains("invoice_company_id")){
+                    throw new IdNotFoundException("There is no company with the id "+invoice.getInvoice_company_id());
+                }
+                if (e.getMostSpecificCause().getMessage().contains("invoice_contact_id")){
+                    throw new IdNotFoundException("There is no contact with the id "+invoice.getInvoice_contact_id());
+                }
+            }
+            if (e.getMessage().contains("Duplicate entry")){
+                throw new DuplicateValueException("The invoice with number "+invoice.getInvoice_number()+", already exists");
+            }
+            throw new InvalidInputException("Unknown exception"+e.getMessage());
         }
     }
 
@@ -34,8 +45,18 @@ public class InvoiceService {
             String error = "|No input: ";
             throw new MissingParametersException(invoiceNullError(invoice,error));
         }catch (DataIntegrityViolationException e){
-            throw new DuplicateValueException(invoice.getInvoice_number()+" is a duplicate, only give in an original vat number");
-        }
+            if (e.getMessage().contains("foreign key constraint")){
+                if (e.getMostSpecificCause().getMessage().contains("invoice_company_id")){
+                    throw new IdNotFoundException("There is no company with the id "+invoice.getInvoice_company_id());
+                }
+                if (e.getMostSpecificCause().getMessage().contains("invoice_contact_id")){
+                    throw new IdNotFoundException("There is no contact with the id "+invoice.getInvoice_contact_id());
+                }
+            }
+            if (e.getMessage().contains("Duplicate entry")){
+                throw new DuplicateValueException("The invoice with number "+invoice.getInvoice_number()+", already exists");
+            }
+            throw new InvalidInputException("Unknown exception"+e.getMessage());        }
     }
 
     public String deleteInvoice(String id){
