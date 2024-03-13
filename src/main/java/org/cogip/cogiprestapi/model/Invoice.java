@@ -16,10 +16,10 @@ public class Invoice {
     private int id;
 
     @Column(nullable = false)
-    private int invoice_company_id;
+    private Integer invoice_company_id;
 
     @Column(nullable = false)
-    private int invoice_contact_id;
+    private Integer invoice_contact_id;
 
     @Column(nullable = false)
     private String invoice_number;

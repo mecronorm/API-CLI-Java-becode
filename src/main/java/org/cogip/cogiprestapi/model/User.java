@@ -1,17 +1,25 @@
 package org.cogip.cogiprestapi.model;
 
+import jakarta.persistence.*;
+import org.cogip.cogiprestapi.enums.UserRole;
+
+@Entity
 public class User {
-  
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(nullable = false)
   private int id;
+
+  @Column(nullable = false)
   private String username;
+
+  @Column(nullable = false)
   private String password;
-  private String role;
-  
-  public User(String username, String password, String role){
-    this.username = username;
-    this.password = password;
-    this.role = role;
-  }
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false, name = "role")
+  private UserRole role;
   
   public int getId(){
     return this.id;
@@ -38,11 +46,11 @@ public class User {
     this.password = password;
   }
   
-  public String getRole() {
+  public UserRole getRole() {
     return role;
   }
   
-  public void setRole(String role) {
+  public void setRole(UserRole role) {
     this.role = role;
   }
 }

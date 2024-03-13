@@ -1,10 +1,7 @@
 package org.cogip.cogiprestapi.Exeptions;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import org.cogip.cogiprestapi.enums.CompanyType;
-import org.cogip.cogiprestapi.enums.InvoiceCurrency;
-import org.cogip.cogiprestapi.enums.InvoiceStatus;
-import org.cogip.cogiprestapi.enums.InvoiceType;
+import org.cogip.cogiprestapi.enums.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -73,6 +70,8 @@ public class APIExceptionHandler {
             apiException = new APIException("value is not a number", null,HttpStatus.UNPROCESSABLE_ENTITY);
         } else if (httpMessageNotReadableException.getMessage().contains("`int`")) {
             apiException = new APIException("company or/and contact id is not a number",null,HttpStatus.UNPROCESSABLE_ENTITY);
+        } else if (httpMessageNotReadableException.getMessage().contains("UserRole")) {
+            apiException = new APIException("role is not an instance of "+ Arrays.toString(UserRole.values()),null,HttpStatus.UNPROCESSABLE_ENTITY);
         } else {
             apiException = new APIException(httpMessageNotReadableException.getMessage(), null, HttpStatus.UNPROCESSABLE_ENTITY);
         }

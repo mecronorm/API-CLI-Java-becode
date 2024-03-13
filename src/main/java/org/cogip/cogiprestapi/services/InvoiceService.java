@@ -19,6 +19,7 @@ public class InvoiceService {
 
     public String createInvoice(Invoice invoice){
         try {
+            if (invoice.getInvoice_contact_id()==0||invoice.getInvoice_company_id()==0) throw new MissingParametersException(invoiceNullError(invoice,newInvoiceNullError(invoice)));
             return invoiceRepository.createInvoice(invoice);
         }catch (NullPointerException e){
             throw new MissingParametersException(invoiceNullError(invoice,newInvoiceNullError(invoice)));
@@ -34,6 +35,7 @@ public class InvoiceService {
             if (e.getMessage().contains("Duplicate entry")){
                 throw new DuplicateValueException("The invoice with number "+invoice.getInvoice_number()+", already exists");
             }
+            if (e.getMessage().contains("cannot be null")) throw new MissingParametersException(invoiceNullError(invoice,newInvoiceNullError(invoice)));
             throw new InvalidInputException("Unknown exception"+e.getMessage());
         }
     }
@@ -56,6 +58,7 @@ public class InvoiceService {
             if (e.getMessage().contains("Duplicate entry")){
                 throw new DuplicateValueException("The invoice with number "+invoice.getInvoice_number()+", already exists");
             }
+            if (e.getMessage().contains("cannot be null")) throw new MissingParametersException(invoiceNullError(invoice,"|No input: "));
             throw new InvalidInputException("Unknown exception"+e.getMessage());        }
     }
 

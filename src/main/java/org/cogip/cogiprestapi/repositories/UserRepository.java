@@ -1,5 +1,6 @@
 package org.cogip.cogiprestapi.repositories;
 
+import org.cogip.cogiprestapi.enums.UserRole;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,7 +36,7 @@ public class UserRepository {
     jdbc.update(sql,
             user.getUsername(),
             user.getPassword(),
-            user.getRole());
+            user.getRole().name());
   }
   
   public User updateUser(int id, User user){
@@ -44,7 +45,7 @@ public class UserRepository {
     sqlBuilder.append("SET username= ?, password= ?, role= ? ");
     sqlBuilder.append("WHERE id= ?");
     
-    jdbc.update(sqlBuilder.toString(), user.getUsername(), user.getPassword(), user.getRole(), id);
+    jdbc.update(sqlBuilder.toString(), user.getUsername(), user.getPassword(), user.getRole().name(), id);
     
     String sqlUpdatedCompany = "SELECT * FROM user WHERE id = ?";
     
@@ -57,11 +58,11 @@ public class UserRepository {
       
       System.out.println("in rowmapper");
       
-      User rowObject = new User("", "","");
+      User rowObject = new User();
       rowObject.setId(resultSet.getInt("id"));
       rowObject.setUserName(resultSet.getString("username"));
       rowObject.setPassword(resultSet.getString("password"));
-      rowObject.setRole(resultSet.getString("role"));
+      rowObject.setRole(UserRole.valueOf(resultSet.getString("role")));
       
       return rowObject;
     };

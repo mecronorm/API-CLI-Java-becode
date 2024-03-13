@@ -28,7 +28,9 @@ public class CompanyService {
             String error = companyNullError(company);
             throw new MissingParametersException(error);
         }catch (DataIntegrityViolationException e){
-            throw new DuplicateValueException(company.getVat()+" is a duplicate, only give in an original vat number");
+            if (e.getMessage().contains("cannot be null")) throw new MissingParametersException(companyNullError(company));
+            if (e.getMessage().contains("Duplicate"))throw new DuplicateValueException(company.getVat()+" is a duplicate, only give in an original vat number");
+            throw new DuplicateValueException(e.getMessage());
         }
     }
 
@@ -39,7 +41,9 @@ public class CompanyService {
         }catch (NullPointerException e) {
             throw new MissingParametersException(companyNullError(company));
         }catch (DataIntegrityViolationException e){
-            throw new DuplicateValueException(company.getVat()+" is a duplicate, only give in an original vat number");
+            if (e.getMessage().contains("cannot be null")) throw new MissingParametersException(companyNullError(company));
+            if (e.getMessage().contains("Duplicate"))throw new DuplicateValueException(company.getVat()+" is a duplicate, only give in an original vat number");
+            throw new DuplicateValueException(e.getMessage());
         }
     }
 

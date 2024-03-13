@@ -20,7 +20,7 @@ public class Contact {
     this.companyId = companyId;
   }
   
-  public int getId() {
+  public Integer getId() {
     return id;
   }
   
