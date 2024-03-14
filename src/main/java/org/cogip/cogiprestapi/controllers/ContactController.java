@@ -25,11 +25,11 @@ public class ContactController {
   
   @GetMapping ("/search")
   public List<Contact> getContactsByFilters(
-          @RequestParam (required = false) Integer id,
+          @RequestParam (required = false) String id,
           @RequestParam (required = false) String firstname,
           @RequestParam (required = false) String lastname,
           @RequestParam (required = false) String phone,
-          @RequestParam (required = false) Integer companyId
+          @RequestParam (required = false) String companyId
   ){
     return this.contactService.getContactsByFilters(id, firstname, lastname, phone, companyId);
   }
@@ -44,7 +44,7 @@ public class ContactController {
   }
   
   @PutMapping ("/{id}")
-  public ResponseEntity<Contact> updateContact(@PathVariable("id") int id, @RequestBody Contact contact){
+  public ResponseEntity<Contact> updateContact(@PathVariable("id") String id, @RequestBody Contact contact){
     Contact updatedContact = this.contactService.updateContact(id, contact);
     
     return ResponseEntity

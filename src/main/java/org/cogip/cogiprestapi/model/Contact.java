@@ -1,12 +1,24 @@
 package org.cogip.cogiprestapi.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import org.springframework.data.annotation.Id;
+
 public class Contact {
-  
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
+  @Column(nullable = false)
   private String firstname;
+  @Column(nullable = false)
   private String lastname;
+  @Column(nullable = false)
   private String phone;
+  @Column(nullable = false)
   private String email;
+  @Column(name = "company_id")
   private int companyId;
   
   public Contact() { }
