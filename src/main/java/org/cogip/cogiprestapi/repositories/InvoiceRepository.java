@@ -1,5 +1,7 @@
 package org.cogip.cogiprestapi.repositories;
 
+import org.cogip.cogiprestapi.dto.InvoiceDTO;
+import org.cogip.cogiprestapi.enums.CompanyType;
 import org.cogip.cogiprestapi.enums.InvoiceCurrency;
 import org.cogip.cogiprestapi.enums.InvoiceStatus;
 import org.cogip.cogiprestapi.enums.InvoiceType;
@@ -42,9 +44,27 @@ public class InvoiceRepository {
         return jdbc.query(sql, invoiceRowMapper());
     }
 
+    public List<InvoiceDTO> getAllInvoiceDTO(){
+        String sql = "SELECT i.invoice_number, i.timestamp, c.name, c.type, con.firstname FROM invoice i LEFT JOIN company c ON c.id = i.invoice_company_id LEFT JOIN contact con ON con.id = i.invoice_contact_id";
+        return jdbc.query(sql, invoiceDTORowMapper());
+    }
+
     public Invoice getInvoiceById(Integer id){
         String sql = "SELECT * FROM invoice WHERE id =?";
         return jdbc.queryForObject(sql,new Object[]{id}, invoiceRowMapper());
+    }
+
+    public static RowMapper<InvoiceDTO> invoiceDTORowMapper(){
+        return (r,i)->{
+            InvoiceDTO rowObject = new InvoiceDTO();
+            rowObject.setNumber(r.getString("invoice_number"));
+            rowObject.setDate(r.getTimestamp("timestamp"));
+            rowObject.setCompany(r.getString("name"));
+            rowObject.setType(CompanyType.valueOf(r.getString("type")));
+            rowObject.setContact(r.getString("firstname"));
+
+            return rowObject;
+        };
     }
 
     public static RowMapper<Invoice> invoiceRowMapper(){

@@ -1,5 +1,6 @@
 package org.cogip.cogiprestapi.services;
 
+import org.cogip.cogiprestapi.dto.InvoiceDTO;
 import org.cogip.cogiprestapi.exceptions.*;
 import org.cogip.cogiprestapi.model.Invoice;
 import org.cogip.cogiprestapi.repositories.InvoiceRepository;
@@ -70,6 +71,11 @@ public class InvoiceService {
     public List<Invoice> getAllInvoice(){
         if (invoiceRepository.getAllInvoice().isEmpty()) throw new ResultSetEmptyException("No data in the database");
         return invoiceRepository.getAllInvoice();
+    }
+
+    public List<InvoiceDTO> getAllInvoiceDTO(){
+        if (invoiceRepository.getAllInvoiceDTO().isEmpty())throw new ResultSetEmptyException("No data in the database");
+        return invoiceRepository.getAllInvoiceDTO();
     }
 
     public Invoice getInvoiceById(String id){
