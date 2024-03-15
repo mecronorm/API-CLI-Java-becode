@@ -1,43 +1,29 @@
-CREATE TABLE IF NOT EXISTS company (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  country VARCHAR(255) NOT NULL,
-  vat VARCHAR(255) UNIQUE NOT NULL,
-  type ENUM('provider', 'client') NOT NULL,
-  timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               8.0.36 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.3.0.6589
+-- --------------------------------------------------------
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE TABLE IF NOT EXISTS contact (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  firstname VARCHAR(255) NOT NULL,
-  lastname VARCHAR(255) NOT NULL,
-  phone VARCHAR(15) NOT NULL,
-  email VARCHAR(255) NOT NULL,
-  timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  contact_company_id INT,
-  FOREIGN KEY (contact_company_id) REFERENCES company(id)
-);
+-- Data exporting was unselected.
 
+-- Data exporting was unselected.
 
-CREATE TABLE IF NOT EXISTS `user` (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
-  role ENUM('admin', 'accountant', 'intern') NOT NULL
-);
+-- Data exporting was unselected.
 
+-- Data exporting was unselected.
 
-CREATE TABLE IF NOT EXISTS invoice (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  invoice_company_id INT,
-  invoice_contact_id INT,
-  invoice_number VARCHAR(255) NOT NULL,
-  value DECIMAL(8,2) NOT NULL,
-  currency ENUM('EUR', 'USD') NOT NULL,
-  type ENUM('incoming', 'outgoing') NOT NULL,
-  status ENUM('open', 'paid') NOT NULL,
-  timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (invoice_company_id) REFERENCES company(id),
-  FOREIGN KEY (invoice_contact_id) REFERENCES contact(id)
-);
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
