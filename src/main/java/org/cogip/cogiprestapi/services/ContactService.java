@@ -1,9 +1,9 @@
 package org.cogip.cogiprestapi.services;
 
-import org.cogip.cogiprestapi.Exeptions.IdNotFoundException;
-import org.cogip.cogiprestapi.Exeptions.InvalidInputException;
-import org.cogip.cogiprestapi.Exeptions.MissingParametersException;
-import org.cogip.cogiprestapi.Exeptions.ResultSetEmptyException;
+import org.cogip.cogiprestapi.exceptions.IdNotFoundException;
+import org.cogip.cogiprestapi.exceptions.InvalidInputException;
+import org.cogip.cogiprestapi.exceptions.MissingParametersException;
+import org.cogip.cogiprestapi.exceptions.ResultSetEmptyException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;

@@ -1,11 +1,10 @@
 package org.cogip.cogiprestapi.controllers;
 
-import org.cogip.cogiprestapi.Exeptions.InvalidInputException;
-import org.cogip.cogiprestapi.enums.CompanyType;
+import org.cogip.cogiprestapi.dto.CompanyDTO;
+import org.cogip.cogiprestapi.exceptions.InvalidInputException;
 import org.cogip.cogiprestapi.model.Company;
 import org.cogip.cogiprestapi.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JsonParseException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,15 +30,22 @@ public class CompanyController {
         return companyService.findAllCompanies();
     }
 
-    @GetMapping("/{id}")
-    public Company findCompanyById(@PathVariable("id") String id){
-        return companyService.findCompanyById(id);
+    @GetMapping("/info")
+    public List<CompanyDTO> findCompaniesDTO(){
+        return companyService.findAllCompaniesDTO();
     }
 
     @GetMapping("/type/{type}")
     public List<Company> getCompanyByType(@PathVariable("type")String type){
         return companyService.findCompanyByType(type);
     }
+
+    @GetMapping("/{id}")
+    public Company findCompanyById(@PathVariable("id") String id){
+        return companyService.findCompanyById(id);
+    }
+
+
 
     @PutMapping("/{id}")
     public String updateCompany(@PathVariable("id") String id,@RequestBody Company company){

@@ -1,6 +1,6 @@
 package org.cogip.cogiprestapi.services;
 
-import org.cogip.cogiprestapi.Exeptions.*;
+import org.cogip.cogiprestapi.exceptions.*;
 import org.cogip.cogiprestapi.model.Invoice;
 import org.cogip.cogiprestapi.repositories.InvoiceRepository;
 import org.springframework.dao.DataIntegrityViolationException;

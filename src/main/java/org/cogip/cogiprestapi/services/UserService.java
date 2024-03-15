@@ -1,6 +1,6 @@
 package org.cogip.cogiprestapi.services;
 
-import org.cogip.cogiprestapi.Exeptions.*;
+import org.cogip.cogiprestapi.exceptions.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;

@@ -1,10 +1,10 @@
 package org.cogip.cogiprestapi.services;
 
-import org.cogip.cogiprestapi.Exeptions.*;
+import org.cogip.cogiprestapi.dto.CompanyDTO;
+import org.cogip.cogiprestapi.exceptions.*;
 import org.cogip.cogiprestapi.enums.CompanyType;
 import org.cogip.cogiprestapi.model.Company;
 import org.cogip.cogiprestapi.repositories.CompanyRepository;
-import org.springframework.boot.json.JsonParseException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -67,6 +67,11 @@ public class CompanyService {
     public List<Company> findAllCompanies(){
         if (companyRepository.findAllCompanies().isEmpty()) throw new ResultSetEmptyException("No data found in the database");
         return companyRepository.findAllCompanies();
+    }
+
+    public List<CompanyDTO> findAllCompaniesDTO(){
+        if (companyRepository.findAllCompaniesDto().isEmpty()) throw new ResultSetEmptyException("No data found n the database");
+        return companyRepository.findAllCompaniesDto();
     }
 
     public Company findCompanyById(String id) {

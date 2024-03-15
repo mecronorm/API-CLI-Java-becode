@@ -1,4 +1,4 @@
-package org.cogip.cogiprestapi.Exeptions;
+package org.cogip.cogiprestapi.exceptions;
 
 import org.springframework.http.HttpStatus;
 

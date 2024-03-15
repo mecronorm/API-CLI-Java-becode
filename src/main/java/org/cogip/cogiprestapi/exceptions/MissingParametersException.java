@@ -1,4 +1,4 @@
-package org.cogip.cogiprestapi.Exeptions;
+package org.cogip.cogiprestapi.exceptions;
 
 public class MissingParametersException extends RuntimeException{
     public MissingParametersException(String message) {
