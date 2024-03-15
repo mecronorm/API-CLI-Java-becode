@@ -1,5 +1,6 @@
 package org.cogip.cogiprestapi.controllers;
 
+import org.cogip.cogiprestapi.dto.ContactDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,11 @@ public class ContactController {
   @GetMapping
   public List<Contact> getAllContact() {
     return this.contactService.getAllContacts();
+  }
+
+  @GetMapping("/info")
+  public List<ContactDTO> getAllContactDTO(){
+    return contactService.getAllContactDTO();
   }
   
   @GetMapping ("/search")

@@ -1,5 +1,6 @@
 package org.cogip.cogiprestapi.services;
 
+import org.cogip.cogiprestapi.dto.ContactDTO;
 import org.cogip.cogiprestapi.exceptions.IdNotFoundException;
 import org.cogip.cogiprestapi.exceptions.InvalidInputException;
 import org.cogip.cogiprestapi.exceptions.MissingParametersException;
@@ -24,6 +25,11 @@ public class ContactService {
   public List<Contact> getAllContacts(){
     if (this.contactRepository.getAllContacts().isEmpty()) throw new ResultSetEmptyException("No contacts in the database");
     return this.contactRepository.getAllContacts();
+  }
+
+  public List<ContactDTO> getAllContactDTO(){
+    if (contactRepository.getAllContactsDTO().isEmpty()) throw new ResultSetEmptyException("No contacts in the database");
+    return contactRepository.getAllContactsDTO();
   }
   
   public List<Contact> getContactsByFilters(String id, String firstname, String lastname, String phone, String companyId){

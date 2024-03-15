@@ -1,11 +1,15 @@
 package org.cogip.cogiprestapi.repositories;
 
+import org.cogip.cogiprestapi.dto.ContactDTO;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.cogip.cogiprestapi.model.Contact;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,22 +21,37 @@ public class ContactRepository {
   public ContactRepository(JdbcTemplate jdbc) {
     this.jdbc = jdbc;
   }
-  
-//  public List<Contact> getAllContacts(){
-//    String sql = "SELECT * FROM contact;";
-//
-//    System.out.println(sql);
-//
-//    try{
-//      return jdbc.query(sql, getContactRowMapper()) ;
-//
-//    }catch (Exception e){
-//      System.out.println("there was an exception");
-//    }
-//    return null;
-//  }
-  
-  
+
+  public List<ContactDTO> getAllContactsDTO(){
+    String sql = "SELECT con.id,con.firstname,con.lastname,con.email, c.name, i.invoice_number FROM contact con LEFT JOIN company c ON c.id = con.company_id LEFT JOIN invoice i ON con.id = i.invoice_contact_id";
+    return jdbc.query(sql, new ResultSetExtractor<List<ContactDTO>>() {
+      @Override
+      public List<ContactDTO> extractData(ResultSet rs) throws SQLException, DataAccessException {
+        List<ContactDTO> list = new ArrayList<>();
+        rs.next();
+        while (!rs.isAfterLast()){
+          ContactDTO c =new ContactDTO();
+          int id = rs.getInt("id");
+          c.setFirstName(rs.getString("firstname"));
+          c.setLastName(rs.getString("lastname"));
+          c.setEmail(rs.getString("email"));
+          c.setCompany(rs.getString("name"));
+          List<String> invoices = new ArrayList<>();
+          while (id==rs.getInt("id")){
+            String invoiceNumber = rs.getString("invoice_number");
+            if (invoiceNumber!=null){
+              invoices.add(invoiceNumber);
+            }
+            rs.next();
+            if (rs.isAfterLast())break;
+          }
+          c.setInvoices(invoices);
+          list.add(c);
+        }
+        return list;
+      }
+    });
+  }
   public List<Contact> getAllContacts() {
     String sql = "SELECT * FROM contact;";
     
