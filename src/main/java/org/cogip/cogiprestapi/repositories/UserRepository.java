@@ -22,6 +22,12 @@ public class UserRepository {
     String sql = "SELECT * FROM user;";
     return jdbc.query(sql, getUserRowMapper());
   }
+
+  public User getUserByUsername(String username){
+    String sql = "SELECT * FROM user WHERE username= ?";
+    User userByUsername = jdbc.queryForObject(sql, getUserRowMapper(), username);
+    return userByUsername;
+  }
   
   public User getUserById(String id){
     String sql = "SELECT * FROM user WHERE id= ?";
