@@ -26,11 +26,13 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("in de loadbyusername");
         User user = userRepository.getUserByUsername(username);
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRole()));
     }
 
     private Collection<GrantedAuthority> mapRolesToAuthorities(UserRole role){
+        System.out.println("in de map roles to authorities");
         Collection<GrantedAuthority> collection = new ArrayList<>();
         GrantedAuthority granted = new SimpleGrantedAuthority("ROLE_"+role.name().toUpperCase());
         collection.add(granted);
